@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: pos-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+    environment:
+      - DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/pos_db
+      - APP_NAME=POS E-commerce Platform
+    depends_on:
+      - db
+    networks:
+      - pos-network
+
+  db:
+    image: postgres:15-alpine
+    container_name: pos-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=pos_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pos-network
+
+volumes:
+  postgres_data:
+
+networks:
+  pos-network:
+    driver: bridge
