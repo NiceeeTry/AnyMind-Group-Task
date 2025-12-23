@@ -1,5 +1,7 @@
 # POS E-commerce Platform
 
+[![CI Pipeline](https://github.com/NiceeeTry/AnyMind-Group-Task/actions/workflows/ci.yml/badge.svg)](https://github.com/NiceeeTry/AnyMind-Group-Task/actions/workflows/ci.yml)
+
 A Point of Sale (POS) system built with FastAPI and GraphQL
 
 
