@@ -18,10 +18,17 @@ class Base(DeclarativeBase):
 
 # Create async engine
 settings = get_settings()
+
+# Configure engine based on database type
+engine_kwargs = {}
+if not settings.database_url.startswith("sqlite"):
+    # PostgreSQL-specific pool settings
+    engine_kwargs["pool_size"] = 10
+    engine_kwargs["max_overflow"] = 20
+
 engine = create_async_engine(
     settings.database_url,
-    pool_size=10,
-    max_overflow=20,
+    **engine_kwargs,
 )
 
 # Create async session factory
